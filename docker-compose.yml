@@ -18,6 +18,7 @@ services:
     build:
       context: ./FrontendApplication
       dockerfile: app.dockerfile
+    depends_on:
+      - api
     ports:
       - "8080:80"
-    
