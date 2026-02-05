@@ -24,7 +24,7 @@ spec:
         - env:
             - name: QUOTES_API
               value: http://quotes:5000
-          image: ralfx22/sme-api:latest
+          image: ralfx22/sme-api:eks
           name: api
           ports:
             - containerPort: 3000

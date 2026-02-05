@@ -21,7 +21,7 @@ spec:
         io.kompose.service: frontend
     spec:
       containers:
-        - image: ralfx22/sme-frontend:latest
+        - image: ralfx22/sme-frontend:eks
           name: frontend
           ports:
             - containerPort: 80

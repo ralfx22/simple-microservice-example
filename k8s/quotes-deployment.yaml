@@ -21,6 +21,6 @@ spec:
         io.kompose.service: quotes
     spec:
       containers:
-        - image: ralfx22/sme-quotes:latest
+        - image: ralfx22/sme-quotes:eks
           name: quotes
       restartPolicy: Always
