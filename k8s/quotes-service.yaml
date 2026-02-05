@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: quotes
+  labels:
+    io.kompose.service: quotes
+spec:
+  ports:
+    - port: 5000
+      targetPort: 5000
+  selector:
+    io.kompose.service: quotes

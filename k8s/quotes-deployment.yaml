@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.37.0 (HEAD)
+  labels:
+    io.kompose.service: quotes
+  name: quotes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: quotes
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.37.0 (HEAD)
+      labels:
+        io.kompose.service: quotes
+    spec:
+      containers:
+        - image: ralfx22/sme-quotes:latest
+          name: quotes
+      restartPolicy: Always
