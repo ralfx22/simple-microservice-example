@@ -1,4 +1,4 @@
-var api = (window.APP_CONFIG && window.APP_CONFIG.API_GATEWAY) || window.location.origin // get API Gateway from runtime config
+var api = process.env.API_GATEWAY // get the API Gateway from the environment
 
 $(document).ready(function() {
     $("#btn").click(function() {
