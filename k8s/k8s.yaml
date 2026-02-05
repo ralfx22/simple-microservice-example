@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: quote-service
-          image: ralfx22/sme-quotes:v2_arm64
+          image: ralfx22/sme-quotes:v2
           ports:
             - containerPort: 5000
 ---
@@ -45,7 +45,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: ralfx22/sme-api:v2_arm64
+          image: ralfx22/sme-api:v2
           ports:
             - containerPort: 3000
           env:
@@ -79,7 +79,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: ralfx22/sme-frontend:v2.1_arm64
+          image: ralfx22/sme-frontend:v2
           ports:
             - containerPort: 80
 ---
@@ -93,4 +93,4 @@ spec:
   ports:
     - port: 80
       targetPort: 80
-  type: NodePort
+  type: LoadBalancer
