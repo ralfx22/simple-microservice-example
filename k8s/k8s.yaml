@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: quote-service
-          image: ralfx22/sme-quotes:v2
+          image: ralfx22/sme-quotes
           ports:
             - containerPort: 5000
 ---
@@ -45,12 +45,12 @@ spec:
     spec:
       containers:
         - name: api
-          image: ralfx22/sme-api:v2
+          image: ralfx22/sme-api
           ports:
             - containerPort: 3000
           env:
             - name: QUOTES_API
-              value: "http://quote-service:5000"
+              value: "http
 ---
 apiVersion: v1
 kind: Service
@@ -79,7 +79,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: ralfx22/sme-frontend:v2
+          image: ralfx22/sme-frontend
           ports:
             - containerPort: 80
 ---
@@ -93,4 +93,34 @@ spec:
   ports:
     - port: 80
       targetPort: 80
-  type: LoadBalancer
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend
+  # key/value hints consumed by the AWS Load Balancer Controller to configure the ALB
+  annotations:
+	# Legacy way to select the controller (is optional)
+    kubernetes.io/ingress.class: alb
+    # Determines whether the ALB is public or private
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    # Controls what the ALB targets, IP targets pod IPs directly
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP"}]'
+spec:
+  # Modern way to select the controller
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+	        # URL path to match
+          - path: /
+            # Prefix means: match / and anything starting with /
+            pathType: Prefix
+            backend:
+			        # The Kubernetes Service to route to
+              service:
+                name: frontend
+                port:
+                  number: 80
