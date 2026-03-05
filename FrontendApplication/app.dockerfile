@@ -1,6 +1,6 @@
 FROM nginx:1.10
 
-ADD vhost.conf /etc/nginx/conf.d/default.conf
+ADD vhost.conf.tmpl /etc/nginx/templates/vhost.conf.tmpl
 
 COPY ./dist /var/www
 COPY ./config/config.js.tmpl /etc/nginx/templates/config.js.tmpl
