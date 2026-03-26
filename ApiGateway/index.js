@@ -1,10 +1,11 @@
 const express = require('express')
-const axios = require('axios')
 const cors = require('cors')
+const { GoogleAuth } = require('google-auth-library')
 const app = express()
 
 // Get the quotes api from the environment(refer docker-compose.yml)
 const QUOTES_API_GATEWAY = process.env.quotes_service_SERVICE_ENDPOINT
+const auth = new GoogleAuth()
 
 // Use CORS to prevent Cross-Origin Requets issue
 app.use(cors())
@@ -18,7 +19,8 @@ app.get('/api/status', (req, res) => {
 app.get('/api/randomquote',async (req, res) => {
     try {
         const url = QUOTES_API_GATEWAY + '/api/quote'
-        const quote = await axios.get(url)
+        const client = await auth.getIdTokenClient(QUOTES_API_GATEWAY)
+        const quote = await client.request({ url })
         return res.json({
             time: Date.now(),
             quote: quote.data
