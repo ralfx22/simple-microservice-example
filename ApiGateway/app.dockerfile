@@ -1,5 +1,5 @@
-# Use official node image from docker
-FROM node:10
+# Use a current LTS Node runtime compatible with google-auth-library
+FROM node:20-slim
 
 # Create application directory
 RUN mkdir -p /usr/src/app
