@@ -50,7 +50,7 @@ spec:
             - containerPort: 3000
           env:
             - name: QUOTES_API
-              value: "http
+              value: "http://quote-service:5000"
 ---
 apiVersion: v1
 kind: Service
