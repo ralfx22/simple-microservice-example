@@ -2,6 +2,12 @@
 
 A very simple microservice example with NodeJS, Python and Docker
 
+## Cloud deployment (Kubernetes & Terraform)
+
+See the branches for cloud-ready artifacts. `v2_docker` has an updated Docker Compose where the API gateway URL is read at runtime instead of baked in at build time. `v2_k8s` adds Kubernetes manifests for a local k3s cluster, and `v2_terraform` extends that with a full AWS/EKS setup. VPC, EKS cluster, managed node group, and IRSA-backed ALB controller.
+
+These branches were created as part of a bachelor's thesis on generating cloud-ready IaC from Docker Compose with LLMs, where this repository served as the reference application for the manual transformation. The `v1_*` branches are an earlier iteration.
+
 ## Run the API gateway
 
 - Install `docker` and `docker-compose` according to your operating system
